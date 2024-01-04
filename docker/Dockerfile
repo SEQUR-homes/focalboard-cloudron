@@ -40,6 +40,6 @@ EXPOSE 8000/tcp
 
 EXPOSE 8000/tcp 9092/tcp
 
-VOLUME /opt/focalboard/data
+ADD docker/start.sh /app/code/start.sh
 
-CMD ["/opt/focalboard/bin/focalboard-server"]
+CMD [ "/app/code/start.sh" ]

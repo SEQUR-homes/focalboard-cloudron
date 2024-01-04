@@ -6,7 +6,8 @@
   "healthCheckPath": "/",
   "httpPort": 8000,
   "addons": {
-    "localstorage": {}
+    "localstorage": {},
+    "postgresql": {}
   },
   "manifestVersion": 2
 }
