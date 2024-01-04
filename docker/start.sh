@@ -1,4 +1,7 @@
 #!/usr/bin/bash
+
+set -euxo pipefail
+
 chown -R cloudron:cloudron /app/data
 mkdir -p /app/data/files
 
