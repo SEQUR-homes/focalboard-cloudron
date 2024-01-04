@@ -43,7 +43,7 @@ jobs:
           context: .
           file: docker/Dockerfile
           push: true
-          tags: ${GITHUB_SHA}
+          tags: ${{ github.sha }}
           labels: ${{ steps.meta.outputs.labels }}
           
   deploy:
@@ -63,7 +63,7 @@ jobs:
             --server ${{ secrets.CLOUDRON_HOST }} \
             --token ${{ secrets.CLOUDRON_TOKEN }} \
             --app ${{ secrets.CLOUDRON_APPNAME }} \
-            --image ghcr.io/sequr-homes/focalboard-cloudron:${GITHUB_SHA}"
+            --image ghcr.io/sequr-homes/focalboard-cloudron:${{ github.sha }}"
           # Retry up to 5 times (with linear backoff)
           NEXT_WAIT_TIME=0
           until [ $NEXT_WAIT_TIME -eq 5 ] || $update; do
