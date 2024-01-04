@@ -41,5 +41,7 @@ EXPOSE 8000/tcp
 EXPOSE 8000/tcp 9092/tcp
 
 ADD docker/start.sh /app/code/start.sh
+RUN chown -R cloudron:cloudron /app/code
+RUN chmod +x /app/code/start.sh
 
 CMD [ "/app/code/start.sh" ]
