@@ -24,6 +24,9 @@ RUN EXCLUDE_PLUGIN=true EXCLUDE_SERVER=true EXCLUDE_ENTERPRISE=true make server-
 ## Final image
 FROM cloudron/base:4.2.0@sha256:46da2fffb36353ef714f97ae8e962bd2c212ca091108d768ba473078319a47f4
 
+ADD docker/start.sh /app/code/start.sh
+RUN chown -R cloudron:cloudron /app/code
+RUN chmod +x /app/code/start.sh
 RUN mkdir -p /opt/focalboard/data/files
 RUN chown -R cloudron:cloudron /opt/focalboard
 
@@ -34,14 +37,11 @@ COPY --from=gobuild --chown=cloudron:cloudron /go/src/focalboard/bin/docker/foca
 COPY --from=gobuild --chown=cloudron:cloudron /go/src/focalboard/LICENSE.txt LICENSE.txt
 COPY --from=gobuild --chown=cloudron:cloudron /go/src/focalboard/docker/server_config.json config.json
 
+
 USER cloudron
 
 EXPOSE 8000/tcp
 
 EXPOSE 8000/tcp 9092/tcp
-
-ADD docker/start.sh /app/code/start.sh
-RUN chown -R cloudron:cloudron /app/code
-RUN chmod +x /app/code/start.sh
 
 CMD [ "/app/code/start.sh" ]
