@@ -1,6 +1,6 @@
 #!/usr/bin/bash
 chown -R cloudron:cloudron /app/data
-mkdir /app/data/files
+mkdir -p /app/data/files
 
 export FOCALBOARD_SERVERROOT=$CLOUDRON_APP_ORIGIN
 export FOCALBOARD_DBTYPE="postgres"
