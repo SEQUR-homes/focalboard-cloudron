@@ -12,5 +12,6 @@ export FOCALBOARD_POSTGRES_DBCONFIG="dbname=${CLOUDRON_POSTGRESQL_DATABASE} sslm
 export FOCALBOARD_WEBPATH="./pack"
 export FOCALBOARD_FILESPATH="/app/data"
 export FOCALBOARD_TELEMETRY="false"
+export FOCALBOARD_ENABLELOCALMODE="false"
 
 /usr/local/bin/gosu cloudron:cloudron /opt/focalboard/bin/focalboard-server
