@@ -38,7 +38,6 @@ COPY --from=gobuild --chown=cloudron:cloudron /go/src/focalboard/LICENSE.txt LIC
 COPY --from=gobuild --chown=cloudron:cloudron /go/src/focalboard/docker/server_config.json config.json
 
 
-USER cloudron
 
 EXPOSE 8000/tcp
 
