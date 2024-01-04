@@ -18,6 +18,8 @@ jobs:
     permissions:
       contents: read
       packages: write
+    outputs:
+      label: ${{ fromJSON(steps.meta.outputs.json).labels['org.opencontainers.image.version'] }}
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -66,7 +68,7 @@ jobs:
             --server ${{ secrets.CLOUDRON_HOST }} \
             --token ${{ secrets.CLOUDRON_TOKEN }} \
             --app ${{ secrets.CLOUDRON_APPNAME }} \
-            --image ghcr.io/sequr-homes/focalboard-cloudron:${{ fromJSON(job.build.steps.meta.outputs.json).labels['org.opencontainers.image.version'] }}"
+            --image ghcr.io/sequr-homes/focalboard-cloudron:${{ needs.build.outputs.label }}"
           # Retry up to 5 times (with linear backoff)
           NEXT_WAIT_TIME=0
           until [ $NEXT_WAIT_TIME -eq 5 ] || $update; do
