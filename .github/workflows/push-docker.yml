@@ -12,7 +12,7 @@ env:
 
 # There is a single job in this workflow. It's configured to run on the latest available version of Ubuntu.
 jobs:
-  build-and-push-image:
+  build:
     runs-on: ubuntu-latest
     # Sets the permissions granted to the `GITHUB_TOKEN` for the actions in this job.
     permissions:
@@ -51,7 +51,7 @@ jobs:
           
   deploy:
     runs-on: ubuntu-latest
-    needs: build-and-push-image
+    needs: build
     steps:
       - uses: actions/checkout@v2
       - name: Environment Setup
@@ -66,7 +66,7 @@ jobs:
             --server ${{ secrets.CLOUDRON_HOST }} \
             --token ${{ secrets.CLOUDRON_TOKEN }} \
             --app ${{ secrets.CLOUDRON_APPNAME }} \
-            --image ghcr.io/sequr-homes/focalboard-cloudron:${{ github.sha }}"
+            --image ghcr.io/sequr-homes/focalboard-cloudron:${{ fromJSON(job.build.steps.meta.outputs.json).labels['org.opencontainers.image.version'] }}"
           # Retry up to 5 times (with linear backoff)
           NEXT_WAIT_TIME=0
           until [ $NEXT_WAIT_TIME -eq 5 ] || $update; do
