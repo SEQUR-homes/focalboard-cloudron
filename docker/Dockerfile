@@ -25,16 +25,16 @@ RUN EXCLUDE_PLUGIN=true EXCLUDE_SERVER=true EXCLUDE_ENTERPRISE=true make server-
 FROM cloudron/base:4.2.0@sha256:46da2fffb36353ef714f97ae8e962bd2c212ca091108d768ba473078319a47f4
 
 RUN mkdir -p /opt/focalboard/data/files
-RUN chown -R nobody:nogroup /opt/focalboard
+RUN chown -R cloudron:cloudron /opt/focalboard
 
 WORKDIR /opt/focalboard
 
-COPY --from=nodebuild --chown=nobody:nogroup /webapp/pack pack/
-COPY --from=gobuild --chown=nobody:nogroup /go/src/focalboard/bin/docker/focalboard-server bin/
-COPY --from=gobuild --chown=nobody:nogroup /go/src/focalboard/LICENSE.txt LICENSE.txt
-COPY --from=gobuild --chown=nobody:nogroup /go/src/focalboard/docker/server_config.json config.json
+COPY --from=nodebuild --chown=cloudron:cloudron /webapp/pack pack/
+COPY --from=gobuild --chown=cloudron:cloudron /go/src/focalboard/bin/docker/focalboard-server bin/
+COPY --from=gobuild --chown=cloudron:cloudron /go/src/focalboard/LICENSE.txt LICENSE.txt
+COPY --from=gobuild --chown=cloudron:cloudron /go/src/focalboard/docker/server_config.json config.json
 
-USER nobody
+USER cloudron
 
 EXPOSE 8000/tcp
 

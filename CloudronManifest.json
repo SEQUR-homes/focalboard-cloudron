@@ -1,0 +1,12 @@
+{
+  "id": "org.sequr.focalboard",
+  "title": "Focalboard",
+  "author": "Melody",
+  "version": "0.1.0",
+  "healthCheckPath": "/",
+  "httpPort": 8000,
+  "addons": {
+    "localstorage": {}
+  },
+  "manifestVersion": 2
+}
